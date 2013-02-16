@@ -9,6 +9,7 @@ import Loc._
 import net.liftmodules.JQueryModule
 import net.liftweb.http.js.jquery._
 
+import code.rest._
 
 
 /**
@@ -25,10 +26,14 @@ class Boot extends Loggable {
     val entries = List(
       Menu.i("Home") / "index", // the simple way to declare a menu
 
+      Menu.i("Stateless page with State access") / "stateless-error" >> Stateless,
+
       // more complex because this menu allows anything in the
       // /static path to be visible
       Menu(Loc("Static", Link(List("static"), true, "/static/index"),
         "Static Content")))
+
+
 
     // set the sitemap.  Note if you don't want access control for
     // each page, just comment this line out.
@@ -53,6 +58,11 @@ class Boot extends Loggable {
     LiftRules.jsArtifacts = JQueryArtifacts
     JQueryModule.InitParam.JQuery = JQueryModule.JQuery172
     JQueryModule.init()
+
+    Numbers.init()
+    //RequestLogging.init()
+    //SessionLogging.init()
+
 
   }
 }
