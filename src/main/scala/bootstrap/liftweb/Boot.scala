@@ -32,6 +32,7 @@ class Boot extends Loggable {
 
       Menu.i("Catch Ajax Exception") / "ajax-error",
 
+      Menu.i("Not Permitted") / "not-permitted" >> Hidden,
 
       // more complex because this menu allows anything in the
       // /static path to be visible
@@ -68,6 +69,7 @@ class Boot extends Loggable {
     //RequestLogging.init()
     //SessionLogging.init()
     ExceptionHandler.init()
+    DownloadService.init()
 
 
   }
