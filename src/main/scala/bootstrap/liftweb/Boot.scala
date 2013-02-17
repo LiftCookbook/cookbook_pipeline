@@ -22,6 +22,13 @@ class Boot extends Loggable {
     // where to search snippet
     LiftRules.addToPackages("code")
 
+    LiftRules.siteMapFailRedirectLocation = "static" :: "permission" :: Nil
+
+    val HeaderRequired = If(
+      () => S.request.map(_.header("ALLOWED") == Full("YES")) openOr false,
+      "Access not allowed"
+    )
+
     // Build SiteMap
     val entries = List(
       Menu.i("Home") / "index", // the simple way to declare a menu
@@ -33,6 +40,9 @@ class Boot extends Loggable {
       Menu.i("Catch Ajax Exception") / "ajax-error",
 
       Menu.i("Not Permitted") / "not-permitted" >> Hidden,
+
+      Menu.i("Header Required") / "header-required" >> HeaderRequired,
+
 
       // more complex because this menu allows anything in the
       // /static path to be visible
