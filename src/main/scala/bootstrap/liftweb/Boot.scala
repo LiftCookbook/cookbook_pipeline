@@ -28,6 +28,11 @@ class Boot extends Loggable {
 
       Menu.i("Stateless page with State access") / "stateless-error" >> Stateless,
 
+      Menu.i("Catch Exception") / "exception-thrown",
+
+      Menu.i("Catch Ajax Exception") / "ajax-error",
+
+
       // more complex because this menu allows anything in the
       // /static path to be visible
       Menu(Loc("Static", Link(List("static"), true, "/static/index"),
@@ -62,6 +67,7 @@ class Boot extends Loggable {
     Numbers.init()
     //RequestLogging.init()
     //SessionLogging.init()
+    ExceptionHandler.init()
 
 
   }
