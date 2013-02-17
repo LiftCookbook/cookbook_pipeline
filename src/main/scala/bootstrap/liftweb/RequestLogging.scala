@@ -1,6 +1,6 @@
 package bootstrap.liftweb
 
-import net.liftweb.http.LiftRules
+import net.liftweb.http.{Req, LiftRules}
 import net.liftweb.common.{Loggable, Full}
 
 object RequestLogging extends Loggable  {
@@ -12,6 +12,7 @@ object RequestLogging extends Loggable  {
     }
 
     LiftRules.onBeginServicing.append {
+      case r @ Req("paypal" :: _, _, _) => logger.info("Paypal request")
       case r => logger.info("On Begin: "+r)
     }
 
